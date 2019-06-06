@@ -1,0 +1,99 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+
+	"liquid-tags-graphql": {
+		"scope": "liquid,html",
+		"prefix": "graphql",
+		"body": [
+			"{%- graphql ${1:g}='${2:resource}'$3 -%}$0"
+		],
+		"description": "Create pOS Liquid 'graphql' tag."
+	},
+	"liquid-tags-log": {
+		"scope": "liquid,html,graphql",
+		"prefix": "log",
+		"body": [
+			"{%- log ${1:data}${2:, type: '${3:resource}'} -%}$0"
+		],
+		"description": "Create pOS Liquid 'log' tag."
+	},
+	"liquid-tags-include_form": {
+		"scope": "liquid,html",
+		"prefix": "include_form",
+		"body": [
+			"{%- include_form '${1:form_name}'${2:, ${3:param}: ${4:value}} -%}$0"
+		],
+		"description": "Create pOS Liquid 'include_form' tag."
+	},
+	"liquid-tags-parse_json": {
+		"scope": "liquid,html",
+		"prefix": "parse_json",
+		"body": [
+			"{%- parse_json ${1:name} -%}",
+				"$0",
+			"{%- endparse_json -%}",
+		],
+		"description": "Create pOS Liquid 'parse_json' tag."
+	},
+	"liquid-partial-field_group": {
+		"scope": "liquid,html",
+		"prefix": "fieldgroup",
+		"body": [
+			"{%- include 'modules/users/forms/fieldGroup', field: form_builder.fields.${1:field_location}, type: '${2:text}', label: '${3:label}' -%}$0"
+		],
+		"description": "Create pOS Liquid 'field_group' snippet."
+	},
+	"liquid-tags-export": {
+		"scope": "liquid,html",
+		"prefix": "export",
+		"body": [
+			"{%- export ${1:a}, namespace: '${2:name}' -%}$0"
+		],
+		"description": "Create pOS Liquid 'export' tag."
+	},
+	"liquid-snippet-name_type": {
+		"scope": "yaml",
+		"prefix": "nt",
+		"body": [
+			"- name: $1",
+			"  type: $2",
+			"$0"
+		],
+		"description": "Add pOS name/type pairs to yaml."
+	},
+	"liquid-snippet-custom_model": {
+		"scope": "yaml",
+		"prefix": "cm",
+		"body": [
+			"name: $1",
+			"properties:",
+			"  - name: $2",
+			"    type: $3",
+			"  $0"
+		],
+		"description": "Start pOS custom model markup."
+	},
+	"liquid-tags-content_for": {
+		"scope": "liquid,html",
+		"prefix": "content_for",
+		"body": [
+			"{%- content_for ${1:name} -%}",
+				"$0",
+			"{%- endcontent_for -%}",
+		],
+		"description": "Create pOS Liquid 'content_for' tag."
+	},
+	"liquid-tags-yield": {
+		"scope": "liquid,html",
+		"prefix": "yield",
+		"body": [
+			"{%- yield '${1:name}' -%}$0"
+		],
+		"description": "Create pOS Liquid 'content_for' tag."
+	}
+}
