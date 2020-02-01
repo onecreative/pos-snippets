@@ -66,9 +66,9 @@
 		],
 		"description": "Add pOS name/type pairs to yaml."
 	},
-	"liquid-snippet-custom_model": {
+	"liquid-snippet-model": {
 		"scope": "yaml",
-		"prefix": "cm",
+		"prefix": "model",
 		"body": [
 			"name: $1",
 			"properties:",
@@ -76,7 +76,7 @@
 			"    type: $3",
 			"  $0"
 		],
-		"description": "Start pOS custom model markup."
+		"description": "Start pOS model schema markup."
 	},
 	"liquid-tags-content_for": {
 		"scope": "liquid,html",
@@ -94,6 +94,46 @@
 		"body": [
 			"{%- yield '${1:name}' -%}$0"
 		],
-		"description": "Create pOS Liquid 'content_for' tag."
+		"description": "Create pOS Liquid 'yield' tag."
+	},
+	"liquid-tags-form": {
+		"scope": "liquid,html",
+		"prefix": "form",
+		"body": [
+			"{%- form -%}",
+			"	$0",
+			"{%- endform -%}"
+		],
+		"description": "Create pOS Liquid 'form' tag."
+	},
+	"liquid-tags-endif": {
+		"scope": "liquid,html",
+		"prefix": "endif",
+		"body": [
+			"{% endif %}$0"
+		],
+		"description": "Create pOS Liquid 'endif' tag."
+	},
+	"liquid-tags-console_log": {
+		"scope": "liquid,html",
+		"prefix": "scl",
+		"body": [
+			"<script>console.log(${1:'${2:label}',}{{${2:var}}})</script>$0"
+		],
+		"description": "Output a liquid variable to the console."
+	},
+	"liquid-snippet-fc": {
+		"scope": "liquid,html",
+		"prefix": "fc",
+		"body": [
+			"---",
+			"name: $1",
+			"resource: $2",
+			"fields:",
+			"  $3",
+			"---",
+			"$0"
+		],
+		"description": "Start pOS form configuration markup."
 	}
 }
