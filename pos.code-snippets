@@ -18,7 +18,7 @@
 		"scope": "liquid,html,graphql",
 		"prefix": "log",
 		"body": [
-			"{%- log ${1:data}${2:, type: '${3:resource}'} -%}$0"
+			"{%- log ${1:data}, type: '${1:data}' -%}$0"
 		],
 		"description": "Create pOS Liquid 'log' tag."
 	},
@@ -44,7 +44,7 @@
 		"scope": "liquid,html",
 		"prefix": "fieldgroup",
 		"body": [
-			"{%- include 'modules/users/forms/fieldGroup', field: form_builder.fields.${1:field_location}, type: '${2:text}', label: '${3:label}' -%}$0"
+			"{%- include 'modules/posdk/forms/field_group', field: form.fields.${1:field_location}, type: '${2:text}', label: '${3:label}' -%}$0"
 		],
 		"description": "Create pOS Liquid 'field_group' snippet."
 	},
@@ -55,16 +55,6 @@
 			"{%- export ${1:a}, namespace: '${2:name}' -%}$0"
 		],
 		"description": "Create pOS Liquid 'export' tag."
-	},
-	"liquid-snippet-name_type": {
-		"scope": "yaml",
-		"prefix": "nt",
-		"body": [
-			"- name: $1",
-			"  type: $2",
-			"$0"
-		],
-		"description": "Add pOS name/type pairs to yaml."
 	},
 	"liquid-snippet-model": {
 		"scope": "yaml",
@@ -77,6 +67,16 @@
 			"  $0"
 		],
 		"description": "Start pOS model schema markup."
+	},
+	"liquid-snippet-name_type": {
+		"scope": "yaml",
+		"prefix": "nt",
+		"body": [
+			"- name: $1",
+			"  type: $2",
+			"$0"
+		],
+		"description": "Add pOS name/type pairs to yaml."
 	},
 	"liquid-tags-content_for": {
 		"scope": "liquid,html",
@@ -101,7 +101,7 @@
 		"prefix": "form",
 		"body": [
 			"{%- form -%}",
-			"	$0",
+			"    $0",
 			"{%- endform -%}"
 		],
 		"description": "Create pOS Liquid 'form' tag."
@@ -118,7 +118,7 @@
 		"scope": "liquid,html",
 		"prefix": "scl",
 		"body": [
-			"<script>console.log(${1:'${2:label}',}{{${2:var}}})</script>$0"
+			"<script>console.log($1)</script>$0"
 		],
 		"description": "Output a liquid variable to the console."
 	},
@@ -135,5 +135,31 @@
 			"$0"
 		],
 		"description": "Start pOS form configuration markup."
+	},
+	"posdk-snippet-trick": {
+		"scope": "javascript",
+		"prefix": "trick",
+		"body": [
+			"/*",
+			"* \"${1:name}\". An awesome trick for pOS.",
+			"* Copyright ${2:2020}, ONE Creative",
+			"*/",
+			"",
+			"posdk.extensions.tricks.${1:name} = function(selector,options) {",
+			"\tvar settings = posdk.extensions.settings(selector,options,{",
+			"\t\tname: '${1:name}',",
+			"\t\tversion: '1.0.0',",
+			"\t\tdate: '${2:2020}.${3:02}.${4:04}',",
+			"\t\tdefaults: {",
+			"",
+			"\t\t}",
+			"\t});",
+			"",
+			"\tconst Methods = {};",
+			"",
+			"\t${0}",
+			"};"
+		],
+		"description": "Start a new posdk trick."
 	}
 }
