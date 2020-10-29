@@ -1,2 +1,2 @@
 # pos-snippets
-VS Code snippets for platformOS.
+platformOS Liquid snippets for VS Code.
