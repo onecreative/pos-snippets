@@ -10,7 +10,7 @@
 		"scope": "liquid,html",
 		"prefix": "graphql",
 		"body": [
-			"{%- graphql ${1:g}='${2:resource}'$3 -%}$0"
+			"{%- graphql ${1:g} = '${2:resource}'$3 -%}$0"
 		],
 		"description": "Create pOS Liquid 'graphql' tag."
 	},
@@ -35,7 +35,7 @@
 		"prefix": "parse_json",
 		"body": [
 			"{%- parse_json ${1:name} -%}",
-				"$0",
+			"	$0",
 			"{%- endparse_json -%}",
 		],
 		"description": "Create pOS Liquid 'parse_json' tag."
@@ -83,10 +83,30 @@
 		"prefix": "content_for",
 		"body": [
 			"{%- content_for ${1:name} -%}",
-				"$0",
+			"	$0",
 			"{%- endcontent_for -%}",
 		],
 		"description": "Create pOS Liquid 'content_for' tag."
+	},
+	"liquid-tags-cache": {
+		"scope": "liquid,html",
+		"prefix": "cache",
+		"body": [
+			"{%- cache ${1:key}${2:, expire: ${3:20}} -%}",
+			"	$0",
+			"{%- endcache -%}",
+		],
+		"description": "Create pOS Liquid 'cache' tag."
+	},
+	"liquid-tags-background": {
+		"scope": "liquid,html",
+		"prefix": "background",
+		"body": [
+			"{% background priority: '${1:default}', delay: ${2:0}, max_attempts: ${3:3}, source_name: '${4:name}' %}",
+			"	$0",
+			"{% endbackground %}",
+		],
+		"description": "Create pOS Liquid 'background' tag."
 	},
 	"liquid-tags-yield": {
 		"scope": "liquid,html",
@@ -95,6 +115,38 @@
 			"{%- yield '${1:name}' -%}$0"
 		],
 		"description": "Create pOS Liquid 'yield' tag."
+	},
+	"liquid-tags-hash-assign": {
+		"scope": "liquid,html",
+		"prefix": "hash_assign",
+		"body": [
+			"{%- hash_assign ${1:my_hash} = '${2:value}'$3 -%}$0"
+		],
+		"description": "Create pOS Liquid 'hash_assign' tag. Allows to easily modify a Hash with a syntax same as assign tag."
+	},
+	"liquid-tags-function": {
+		"scope": "liquid,html",
+		"prefix": "function",
+		"body": [
+			"{%- function ${1:res} = '${2:partial}'$3 -%}$0"
+		],
+		"description": "Create pOS Liquid 'function' tag. Allows to store a variable returned by a partial."
+	},
+	"liquid-tags-return": {
+		"scope": "liquid,html",
+		"prefix": "return",
+		"body": [
+			"{%- return ${1:result} -%}$0"
+		],
+		"description": "Create pOS Liquid 'return' tag. Used inside a partial invoked by a function tag to return a variable."
+	},
+	"liquid-tags-redirect_to": {
+		"scope": "liquid,html",
+		"prefix": "redirect_to",
+		"body": [
+			"{%- redirect_to ${1:'/path'}${2:, status: ${3:301}} -%}$0"
+		],
+		"description": "Create pOS Liquid 'redirect_to' tag. Redirects browser to target."
 	},
 	"liquid-tags-form": {
 		"scope": "liquid,html",
@@ -141,21 +193,19 @@
 		"prefix": "trick",
 		"body": [
 			"/*",
-			"* \"${1:name}\". An awesome trick for pOS.",
-			"* Copyright ${2:2020}, ONE Creative",
+			"* \"${TM_FILENAME_BASE}\". An awesome trick for pOS.",
+			"* Copyright ${CURRENT_YEAR}, ONE Creative",
 			"*/",
 			"",
-			"posdk.extensions.tricks.${1:name} = function(selector,options) {",
+			"posdk.extensions.tricks.${TM_FILENAME_BASE} = function(selector,options) {",
 			"\tvar settings = posdk.extensions.settings(selector,options,{",
-			"\t\tname: '${1:name}',",
+			"\t\tname: '${TM_FILENAME_BASE}',",
 			"\t\tversion: '1.0.0',",
-			"\t\tdate: '${2:2020}.${3:02}.${4:04}',",
+			"\t\tdate: '${CURRENT_YEAR}.${CURRENT_MONTH}.${CURRENT_DATE}',",
 			"\t\tdefaults: {",
 			"",
 			"\t\t}",
 			"\t});",
-			"",
-			"\tconst Methods = {};",
 			"",
 			"\t${0}",
 			"};"
